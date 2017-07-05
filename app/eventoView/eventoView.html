@@ -1,0 +1,25 @@
+<!-- <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{googleMapsUrl}}" class="col-md-8">
+    <ng-map center="45.071087, 7.686567" zoom="12">
+        <marker ng-repeat="pos in dati.vm.positions" position="{{pos.lat}},{{pos.lng}}"></marker>
+    </ng-map>
+</div> -->
+<div class="row">
+    <div class="col-xs-12 col-md-4">
+        <ul class="media-list">
+            <li class="media" ng-repeat="evento in dati.eventi">
+                <a href="#!/detailsPizza/{{evento.id}}">
+                    <div class="media-left">
+                        <img class="media-object" ng-src="../{{evento.img_url}}" alt="{{evento.img_alt}}" ng-if="!(evento.img_url.includes('https://firebasestorage.googleapis.com')) && evento.img_url!=''">
+                        <img class="media-object" ng-src="{{evento.img_url}}" alt="{{evento.img_alt}}" ng-if="evento.img_url.includes('https://firebasestorage.googleapis.com')">
+                        <img class="media-object" ng-src="../images/notAvailable.png" alt="{{evento.img_alt}}" ng-if="evento.img_url == ''">
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading"><strong>{{evento.nome_evento}}</strong></h4>
+                        <p>{{evento.nome_organizzatore}}</p>
+                    </div>
+                    <hr/>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
