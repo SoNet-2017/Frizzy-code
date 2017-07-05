@@ -23,10 +23,18 @@
   <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
   <script src="app.js"></script>
+  <script src="eventoView/eventoView.js"></script>
+  <script src="components/eventi/evento.js"></script>
+  <script src="components/eventi/evento-service.js"></script>
+  <script src="components/eventi/single-evento-service.js"></script>
   <script src="loginView/loginView.js"></script>
+  <script src="components/users/users.js"></script>
+  <script src="components/users/users-service.js"></script>
   <script src="components/authentication/authentication.js"></script>
   <script src="components/authentication/authentication-service.js"></script>
   <script src="userRegistrationView/userRegistrationView.js"></script>
+  <script src="addEventoView/addEventoView.js"></script>
+  <script src="components/eventi/insert-evento-service.js"></script>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -34,8 +42,27 @@
 </head>
 
 <body ng-app="myApp" ng-controller="MainCtrl">
+<header class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h1 class="navbar-brand">Eventi</h1>
+    </div>
+  </div>
+</header>
+
 <div class="container-fluid" ng-view>
 
 </div>
+
+<footer class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-center">
+            <li ng-class="{'active' : dati.currentView === 'home'}"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li ng-class="{'active' : dati.currentView === 'addEvento'}" ng-if="isLogged()"><a href="#!/addEvento" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></a></li>
+            <!-- <li ng-class="{'active' : dati.currentView === 'userProfile'}" ng-if="isLogged()"><a href="#!/userProfile"><span class="glyphicon glyphicon-user"></span></a></li>
+            <li ng-class="{'active' : dati.currentView === 'chat'}" ng-if="isLogged()"><a href="#!/usersList"><span class="glyphicon glyphicon-comment"></span></a></li> -->
+        </ul>
+    </div>
+</footer>
 </body>
 </html>

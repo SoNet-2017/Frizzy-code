@@ -15,7 +15,11 @@ firebase.initializeApp(config);
 angular.module('myApp', [
     "firebase",
     'ngRoute',
+    'myApp.eventoView',
+    'myApp.evento',
     'myApp.loginView',
+    'myApp.users',
+    'myApp.addEventoView',
     'myApp.authentication',
     'myApp.userRegistrationView'
 ])

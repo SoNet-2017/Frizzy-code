@@ -1,0 +1,26 @@
+<div  ng-controller="addEventoViewCtrl as $ctrl">
+    <div class="alert alert-success alert-dismissible" role="alert" ng-if="dati.feedback">{{ dati.feedback }}</div>
+    <div class="alert alert-danger alert-dismissible" role="alert" ng-if="dati.error">{{ dati.error }}</div>
+
+    <form id="frmAddEvento" role="form" ng-submit="addEvento()">
+        <h2>Add a new evento</h2>
+        <div class="form-group">
+            <b>Descriptive image:</b>
+            <file-upload on-change="$ctrl.onChange">
+            </file-upload>
+        </div>
+        <div class="form-group">
+            <label for="txtName">Name</label>
+            <input type="text" class="form-control" id="txtName" placeholder="Enter name" name="name" ng-model="dati.nome_evento" />
+        </div>
+        <div class="form-group">
+            <label for="txtOrganizzatore">Organizzatore</label>
+            <input type="text" class="form-control" id="txtOrganizzatore" placeholder="Enter the name of the manager" name="organizzatore" ng-model="dati.nome_organizzatore" />
+        </div>
+        <div class="form-group">
+            <label for="txtAddress">Evento address</label>
+            <input type="text" class="form-control" id="txtAddress" placeholder="Enter the address of the event" name="address" ng-model="dati.address" />
+        </div>
+        <button type="submit" class="btn btn-success center-block">Insert</button>
+    </form>
+</div>

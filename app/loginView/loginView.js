@@ -24,7 +24,7 @@ angular.module('myApp.loginView', ['ngRoute'])
             var userId = firebaseUser.uid;
             Users.registerLogin(userId, $scope.user.email);
             // login successful: redirect to the pizza list
-            $location.path("/pizzaView");
+            $location.path("/eventoView");
         }).catch(function(error) {
             $scope.error = error;
             $log.error(error.message);

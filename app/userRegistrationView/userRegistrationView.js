@@ -25,7 +25,7 @@ angular.module('myApp.userRegistrationView', ['ngRoute'])
                         var userId = internalFirebaseUser.uid;
                         Users.registerNewUserInfo(userId, $scope.user.name, $scope.user.surname, $scope.user.email);
                         Users.registerLogin(userId, $scope.user.email);
-                        // login successful: redirect to the pizza list
+                        // login successful: redirect to the evento list
                         $location.path("/eventoView");
                     }).catch(function(error) {
                         $scope.error = error;
