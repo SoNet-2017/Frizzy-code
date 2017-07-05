@@ -30,11 +30,18 @@
   <script src="loginView/loginView.js"></script>
   <script src="components/users/users.js"></script>
   <script src="components/users/users-service.js"></script>
+  <script src="usersListView/usersListView.js"></script>
+  <script src="components/users/users-list-service.js"></script>
+  <script src="chatView/chatView.js"></script>
+  <script src="components/users/user-chat-service.js"></script>
   <script src="components/authentication/authentication.js"></script>
   <script src="components/authentication/authentication-service.js"></script>
   <script src="userRegistrationView/userRegistrationView.js"></script>
   <script src="addEventoView/addEventoView.js"></script>
+  <script src="userProfile/userProfileView.js"></script>
   <script src="components/eventi/insert-evento-service.js"></script>
+  <script src="components/file-upload/file-upload.js"></script>
+  <script src="components/file-upload/file-upload-directive.js"></script>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -57,10 +64,10 @@
 <footer class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-center">
-            <li ng-class="{'active' : dati.currentView === 'home'}"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li ng-class="{'active' : dati.currentView === 'home'}"><a href="#!/eventoView"><span class="glyphicon glyphicon-home"></span></a></li>
             <li ng-class="{'active' : dati.currentView === 'addEvento'}" ng-if="isLogged()"><a href="#!/addEvento" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></a></li>
-            <!-- <li ng-class="{'active' : dati.currentView === 'userProfile'}" ng-if="isLogged()"><a href="#!/userProfile"><span class="glyphicon glyphicon-user"></span></a></li>
-            <li ng-class="{'active' : dati.currentView === 'chat'}" ng-if="isLogged()"><a href="#!/usersList"><span class="glyphicon glyphicon-comment"></span></a></li> -->
+            <li ng-class="{'active' : dati.currentView === 'userProfile'}" ng-if="isLogged()"><a href="#!/userProfile"><span class="glyphicon glyphicon-user"></span></a></li>
+            <li ng-if="isLogged()"><a href="#!/loginView"><span class="glyphicon glyphicon-log-out" ng-click="logout();"></span></a></li>
         </ul>
     </div>
 </footer>

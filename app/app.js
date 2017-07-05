@@ -19,9 +19,13 @@ angular.module('myApp', [
     'myApp.evento',
     'myApp.loginView',
     'myApp.users',
+    'myApp.usersListView',
+    'myApp.chatView',
+    'myApp.userProfileView',
     'myApp.addEventoView',
     'myApp.authentication',
-    'myApp.userRegistrationView'
+    'myApp.userRegistrationView',
+    'myApp.fileUpload'
 ])
     .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
         $locationProvider.hashPrefix('!');
