@@ -25,7 +25,7 @@ angular.module('myApp.eventoView', ['ngRoute','myApp.evento'])
     $scope.dati.vm = this;
     $scope.dati.vm.positions = [];
     //set the variable that is used in the main template to show the active button
-    $rootScope.dati.currentView = "home";
+    $scope.now=new Date();
     //get the list of available pizzas
     $scope.dati.eventi = Evento.getData();
     //$scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6qAQOEvZs2XlUUu3ziu-nrDX-WWZXap4";

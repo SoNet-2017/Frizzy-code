@@ -1,26 +1,105 @@
 <div  ng-controller="addEventoViewCtrl as $ctrl">
-    <div class="alert alert-success alert-dismissible" role="alert" ng-if="dati.feedback">{{ dati.feedback }}</div>
-    <div class="alert alert-danger alert-dismissible" role="alert" ng-if="dati.error">{{ dati.error }}</div>
-
-    <form id="frmAddEvento" role="form" ng-submit="addEvento()">
-        <h2>Add a new evento</h2>
-        <div class="form-group">
-            <b>Descriptive image:</b>
-            <file-upload on-change="$ctrl.onChange">
-            </file-upload>
+	<div class="header">
+      <div class="outerHeader">
+        <div class="MenuHeader">
+          <a onclick="window.history.back()"><span class="fa fa-chevron-left"></span></a>
         </div>
-        <div class="form-group">
-            <label for="txtName">Name</label>
-            <input type="text" class="form-control" id="txtName" placeholder="Enter name" name="name" ng-model="dati.nome_evento" />
+      </div>
+      <div class="centerHeader">
+        <span class="title">NUOVO EVENTO</span>
+      </div>
+      <div class="outerHeader">
+      </div>
+    </div>
+    <div class="container" style="width: 90%">
+      <form action="#!/eventoView" method="post" class="form-horizontal" ng-submit="addEvento()">
+      <div class="row" style="margin-top: 170px">
+        <div class="col-xs-5">
+          <div class="form-group">
+            <label for="nome" style="font-size: 1.5em" class="control-label">Nome Evento</label><br /><br />
+            <input type="text" id="nome" class="form-control" placeholder="Nome Evento" name="nome" ng-model="dati.nome_evento"/>
+          </div>
+          <div class="form-group">
+            <label for="nome" style="font-size: 1.5em" class="control-label">Data Evento</label><br /><br />
+            <input type="date" id="data" class="form-control" name="data" ng-model="dati.data_evento"/>
+          </div>
+          <div class="form-group">
+            <label style="font-size: 1.5em" class="control-label">Luogo Evento</label><br /><br />
+            <div id="locationField">
+              <input id="autocomplete" class="form-control" placeholder="Luogo Evento" onFocus="geolocate()" type="text" name="map" ng-model="dati.location_evento"/>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-            <label for="txtOrganizzatore">Organizzatore</label>
-            <input type="text" class="form-control" id="txtOrganizzatore" placeholder="Enter the name of the manager" name="organizzatore" ng-model="dati.nome_organizzatore" />
+        <div class="col-xs-6 col-xs-offset-1">
+          <div class="form-group">
+            <label for="nummin" style="font-size: 1.5em" class="control-label">Numero Minimo Invitati</label><br /><br />
+            <input type="number" id="nummin" class="form-control" name="nummin" min="1" max="20" style="width: 80px" value="1" ng-model="dati.min_invitati"/>
+          </div>
+          <div class="form-group">
+            <label for="nummax" style="font-size: 1.5em" class="control-label">Numero Massimo Invitati</label><br /><br />
+            <input type="number" id="nummax" class="form-control" name="nummax" min="2" max="50" style="width: 80px" value="50" ng-model="dati.max_invitati"/>
+          </div>
+          <div class="form-group">
+            <label for="prezzo" style="font-size: 1.5em" class="control-label">Prezzo</label><br /><br />
+            <input type="number" id="prezzo" class="form-control" name="prezzo" min="1" max="10" style="width: 80px" value="3" ng-model="dati.prezzo"/>
+          </div>
         </div>
-        <div class="form-group">
-            <label for="txtAddress">Evento address</label>
-            <input type="text" class="form-control" id="txtAddress" placeholder="Enter the address of the event" name="address" ng-model="dati.address" />
-        </div>
-        <button type="submit" class="btn btn-success center-block">Insert</button>
-    </form>
+      </div>
+      <div class="row" style="margin-top: 50px">
+        <input type="submit" class="btn btn-default" name="submit" value="CONTINUA"/>
+      </div>
+      </form>
+    </div>
 </div>
+<script>
+    var placeSearch, autocomplete;
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+            {types: ['geocode']});
+        autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+            document.getElementById(component).value = '';
+            document.getElementById(component).disabled = false;
+        }
+
+        for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                document.getElementById(addressType).value = val;
+            }
+        }
+    }
+
+    function geolocate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                    center: geolocation,
+                    radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+            });
+        }
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPAnegZsJM8HqGw-ysidrxQT3pZZF3Irk&libraries=places&callback=initAutocomplete" async defer></script>

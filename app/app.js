@@ -45,7 +45,11 @@ angular.module('myApp', [
         //it is used to show menu buttons only when the user is logged
         //set the variable that is used in the main template to show the active button
         $rootScope.dati = {};
-        $rootScope.dati.currentView = 'home';
+        $rootScope.dati.currentView = 'NOW';
+
+        $scope.changeView = function(view){
+            $rootScope.dati.currentView = view;
+        }
         $scope.isLogged = function()
         {
             if ($firebaseAuth().$getAuth())

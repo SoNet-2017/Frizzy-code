@@ -2,21 +2,28 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Frizzy</title>
+  <title>FRIZZY!</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css"/>
   <link rel="stylesheet" href="app.css"/>
 
+  <link rel="stylesheet" href="../lib/bootstrap/fonts/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="../lib/bootstrap/css/style.css">
   <!-- Angular -->
-  <script src="../lib/angular/angular.min.js"></script>
+  <script src="../lib/angular/angular.js"></script>
   <script src="../lib/angular/angular-route.min.js"></script>
   <script src="../lib/angular/angular-resource.min.js"></script>
   <!-- Bootstrap -->
   <script src="../lib/bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
+   <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="../js/codice.js"></script>
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-  <!-- Firebase -->
+ <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
 
   <!-- AngularFire -->
@@ -43,33 +50,59 @@
   <script src="components/file-upload/file-upload.js"></script>
   <script src="components/file-upload/file-upload-directive.js"></script>
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
 </head>
 
 <body ng-app="myApp" ng-controller="MainCtrl">
-<header class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <h1 class="navbar-brand">Eventi</h1>
+<div class="header"  ng-if="dati.currentView !== 'addEvento'">
+  <div class="outerHeader">
+    <div class="MenuHeader">
+      <span class="fa fa-bars"></span>
+		 <div id="toggled">
+		  <div id="menuTopBar">
+			<a href="#!/eventoView">HOME</a><br/>
+			<a href="#!/userProfileView" ng-if="isLogged()">PROFILO</a><br/>
+			<a href="#!/addEventoView" ng-if="isLogged()">CREA EVENTO</a><br/>
+			<a href="#!/loginView" ng-if="isLogged()" ng-click="logout();">LOGOUT</a><br/>
+			<a href="#!/userRegistrationView" ng-if="!isLogged()">REGISTRATI</a><br/>
+		  </div>
     </div>
   </div>
-</header>
-
-<div class="container-fluid" ng-view>
-
 </div>
-
+  <div class="centerHeader">
+    <img src="../img/1.png" class="img-responsive center-block" style="max-height: 120px;"  />
+  </div>
+  <div class="outerHeader">
+        <div class="MenuHeader">
+          <span class="fa fa-bell"></span>
+        </div>
+      </div>
+</div>
+<div class="container" style="width: 90%" ng-if="dati.currentView !== 'addEvento'">
+  <div class="row" style="margin-top: 170px;">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div ng-class="{'scheda active' : dati.currentView === 'PAST', 'scheda' : dati.currentView !== 'PAST'}" id="sx">
+        <a href="#!/eventoView" ng-click="changeView('PAST')">PAST</a>
+      </div>
+      <div ng-class="{'scheda active' : dati.currentView === 'NOW', 'scheda' : dati.currentView !== 'NOW'}" id="cc">
+        <a href="#!/eventoView"  ng-click="changeView('NOW')">NOW</a>
+      </div>
+      <div ng-class="{'scheda active' : dati.currentView === 'FUTURE', 'scheda' : dati.currentView !== 'FUTURE'}" id="dx">
+        <a href="#!/eventoView" ng-click="changeView('FUTURE')">FUTURE</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" ng-view />
+<!--
 <footer class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-center">
+        <ul class="nav navbar-nav navbarng-class="{'active' : dati.currentView === 'addEvento'}"-center">
             <li ng-class="{'active' : dati.currentView === 'home'}"><a href="#!/eventoView"><span class="glyphicon glyphicon-home"></span></a></li>
-            <li ng-class="{'active' : dati.currentView === 'addEvento'}" ng-if="isLogged()"><a href="#!/addEvento" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></a></li>
+            <li  ng-if="isLogged()"><a href="#!/addEvento" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></a></li>
             <li ng-class="{'active' : dati.currentView === 'userProfile'}" ng-if="isLogged()"><a href="#!/userProfile"><span class="glyphicon glyphicon-user"></span></a></li>
             <li ng-if="isLogged()"><a href="#!/loginView"><span class="glyphicon glyphicon-log-out" ng-click="logout();"></span></a></li>
         </ul>
     </div>
-</footer>
+</footer> -->
 </body>
 </html>

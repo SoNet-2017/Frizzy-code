@@ -2,24 +2,71 @@
     <ng-map center="45.071087, 7.686567" zoom="12">
         <marker ng-repeat="pos in dati.vm.positions" position="{{pos.lat}},{{pos.lng}}"></marker>
     </ng-map>
+</div>
+<div class="header">
+	<div class="outerHeader">
+		<div class="MenuHeader">
+			<span class="fa fa-bars"></span>
+		</div>
+	</div>
+	<div class="centerHeader">
+		<img src="../img/1.png" class="img-responsive center-block" style="max-height: 120px;"  />
+	</div>
+	<div class="outerHeader">
+		<div class="MenuHeader">
+			<span class="fa fa-bell"></span>
+		</div>
+	</div>
+</div>
+<div class="container" style="width: 90%" ng-controller="View1Ctrl">
+	<div class="row" style="margin-top: 170px;">
+		<div class="col-xs-10 col-xs-offset-1">
+			<div class="scheda" id="sx">
+				<a href="#!/eventoView" ng-class="{'active' : dati.currentView === 'PAST'}" ng-click="changeView('PAST')">PAST</a>
+			</div>
+			<div class="scheda active" id="cc">
+				<a href="#!/eventoView" ng-class="{'active' : dati.currentView === 'NOW'}" ng-click="changeView('NOW')">NOW</a>
+			</div>
+			<div class="scheda" id="dx">
+				<a href="#!/eventoView" ng-class="{'active' : dati.currentView === 'FUTURE'}" ng-click="changeView('FUTURE')">FUTURE</a>
+			</div>
+		</div>
+	</div>
 </div> -->
+
 <div class="row">
-    <div class="col-xs-12 col-md-4">
-        <ul class="media-list">
-            <li class="media" ng-repeat="evento in dati.eventi">
-                <a href="#!/detailsPizza/{{evento.id}}">
-                    <div class="media-left">
-                        <img class="media-object" ng-src="../{{evento.img_url}}" alt="{{evento.img_alt}}" ng-if="!(evento.img_url.includes('https://firebasestorage.googleapis.com')) && evento.img_url!=''">
-                        <img class="media-object" ng-src="{{evento.img_url}}" alt="{{evento.img_alt}}" ng-if="evento.img_url.includes('https://firebasestorage.googleapis.com')">
-                        <img class="media-object" ng-src="../images/notAvailable.png" alt="{{evento.img_alt}}" ng-if="evento.img_url == ''">
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading"><strong>{{evento.nome_evento}}</strong></h4>
-                        <p>{{evento.nome_organizzatore}}</p>
-                    </div>
-                    <hr/>
-                </a>
-            </li>
-        </ul>
+    <div class="col-xs-12 col-md-4" ng-repeat="evento in dati.eventi">
+		<div class="contenitore viola"
+			 ng-if="$index % 2 == 0 "> <!-- Controllo sulle date e sulla currentView da aggiungere in ng-if-->
+			<a href="#!/detailsEvento/{{evento.id}}">
+				<div class="media-body">
+					<h4 class="media-heading"><strong>{{evento.nome_evento}}</strong></h4>
+					Location: {{evento.location_evento}}<br/>
+					Date: {{evento.data_evento}}<br/>
+					Min invitati: {{evento.min_invitati}}<br/>
+					Max invitati: {{evento.max_invitati}}<br/>
+					Prezzo: {{evento.prezzo}} €<br/>
+				</div>
+				<hr/>
+			</a>
+		</div>
+		<div class="contenitore fucsia" ng-if="$index % 2 == 1"> <!-- Controllo sulle date e sulla currentView da aggiungere in ng-if-->
+			<a href="#!/detailsEvento/{{evento.id}}">
+				<div class="media-body">
+					<h4 class="media-heading"><strong>{{evento.nome_evento}}</strong></h4>
+					Location: {{evento.location_evento}}<br/>
+					Date: {{evento.data_evento}}<br/>
+					Min invitati: {{evento.min_invitati}}<br/>
+					Max invitati: {{evento.max_invitati}}<br/>
+					Prezzo: {{evento.prezzo}} €<br/>
+				</div>
+				<hr/>
+			</a>
+		</div>
     </div>
+</div>
+
+</div>
+<div id="aggiungimg">
+	<a href="#!/addEvento" data-toggle="modal" data-target="#myModal"><span id="submitadd">CREA EVENTO</span></a>
 </div>

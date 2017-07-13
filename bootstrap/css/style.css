@@ -1,0 +1,281 @@
+/*
+COLORI PALETTA:
+  viola: #621b8c
+  giallo: #eaf32e
+  fucsia: #f2137d
+  verde: #63f16f
+  bianco: #f2f2f2
+*/
+
+a:hover, a:active, a:visited, a:focus{
+  text-decoration: none;
+}
+
+@font-face {
+	font-family: 'Nintendo';
+   src: local('../fonts/NNT'), url('../fonts/NNT.ttf') format('truetype');
+   font-style: normal;
+	font-weight: normal;
+}
+
+body{
+  background: #f2f2f2;
+  font-size: 10px;
+}
+
+.header{
+  width: 100%;
+  height: 120px;
+  float: left;
+  background: #621b8c;
+  position: fixed;
+  top:0;
+  left:0;
+  z-index: 1;
+}
+
+.outerHeader{
+  width: 15%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  float: left;
+}
+
+.centerHeader{
+  width: 70%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  float: left;
+  text-align: center;
+}
+
+.centerHeader > .title {
+  font-size: 9vmin;
+  font-family: 'Nintendo';
+  line-height: 120px;
+  color: #f2137d;
+}
+
+.MenuHeader{
+  height: 80px;
+  width: 70%;
+  float: left;
+  margin: 20px 15% 20px 15%;
+  text-align: center;
+}
+
+.fa-bars, .fa-bell, .fa-chevron-left{
+  font-size: 8vmin;
+  line-height: 80px;
+  padding: 0;
+  margin: 0;
+  color: #f2137d;
+}
+
+.fa-chevron-left:hover, .fa-bars:hover{
+  cursor: pointer;
+}
+
+.scheda {
+  background: #eee;
+  border-top: 2px solid #621b8c;
+  width: 33%;
+  height: 100px;
+  float: left;
+  text-align: center;
+}
+
+#sx {
+  border-left: 2px solid #621b8c;
+  border-radius: 7px 0 0 0;
+}
+
+#dx {
+  border-right: 2px solid #621b8c;
+  border-radius: 0 7px 0 0;
+}
+
+#cc {
+  border-right: 2px solid #621b8c;
+  border-left: 2px solid #621b8c;
+}
+
+.scheda > a{
+  width: 100%;
+  height: 98px;
+  float: left;
+  line-height: 120px;
+  font-size: 7vmin;
+  font-family: 'Nintendo';
+  color: #621b8c;
+  word-wrap: break-word;
+}
+
+.scheda:hover{
+  background: #f2137d;
+}
+
+.scheda:hover a {
+  color: #eaf32e;
+}
+
+.active a {
+  color: #f2137d;
+}
+
+.active {
+  background: #621b8c;
+}
+
+.active:hover {
+  background: #621b8c;
+}
+
+.active:hover a{
+  color: #f2137d;
+  cursor: default;
+}
+
+.contenitore {
+  width: 100%;
+  min-height: 200px;
+  float: left;
+  padding: 25px;
+  position: relative;
+  font-size: 3vmin;
+}
+
+.viola {
+  background: #621b8c;
+  border: 2px solid #621b8c;
+  border-radius: 7px;
+  color: #f2137d;
+}
+
+.fucsia {
+  background: #f2137d;
+  border: 2px solid #f2137d;
+  border-radius: 7px;
+  color: #621b8c;
+}
+
+.contenitore > h1{
+  font-size: 7vmin;
+  display: inline-block;
+  font-family: 'Nintendo';
+  line-height: 0px;
+}
+
+.contenitore > .utente-evento{
+  position: absolute;
+  bottom: -25px;
+  right: -15px;
+  background: #eaf32e;
+  border-radius: 100px;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}
+
+.utente-evento > .fa-user, .fa-plus-circle{
+  font-size: 9vmin;
+  line-height: 100px;
+  color: #f2137d;
+  padding: 0;
+  margin: 0;
+}
+
+.photo{
+  width: 25%;
+  height: auto;
+  float: left;
+}
+
+#aggiungimg, .sotto-click-fixed{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  background: #621b8c;
+}
+
+#submitadd{
+  width: 100%;
+  height: 100%;
+  float: left;
+  background: transparent;
+  border: 0;
+  line-height: 70px;
+  font-size: 7vmin;
+  font-family: 'Nintendo';
+  color: #f2137d;
+  text-align: center;
+}
+
+#toggled{
+  width: 100%;
+  height: 100%;
+  float: left;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background: #621b8c;
+  margin-top: 120px;
+  box-shadow: inset 0px 4px 7px rgba(0,0,0,0.15);
+}
+
+#menuTopBar{
+  font-size: 6vmin;
+  text-transform: uppercase;
+  line-height: 8vmin;
+  font-weight: 500;
+  padding: 30px 0 30px 30px;
+  letter-spacing: 2px;
+  text-align: left;
+}
+
+#menuTopBar a {
+  color: #f2137d;
+}
+
+.login-div{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 50px 30% 0 30%;
+  color: #f2137d;
+}
+
+.rating{
+  background: #621b8c;
+  color: #f2137d;
+  width: 100%;
+  height: 120px;
+  position: absolute;
+  left: 0;
+  font-size: 12vmin;
+  line-height: 120px;
+}
+
+.round-profilo{
+  width: 220px;
+  height: 220px;
+  background: #eaf32e;
+  border-radius: 220px;
+  display: block;
+  text-align: center;
+  line-height: 220px;
+  z-index: 2;
+  position: relative;
+  color: #f2137d;
+}
+
+.round-profilo > .fa-user{
+  font-size: 20vmin;
+  line-height: 220px;
+}

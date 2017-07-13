@@ -1,0 +1,63 @@
+<div class="header">
+    <div class="outerHeader">
+        <div class="MenuHeader">
+            <a onclick="window.history.back()"><span class="fa fa-chevron-left"></span></a>
+        </div>
+    </div>
+    <div class="centerHeader">
+        <span class="title">NECESSITA'</span>
+    </div>
+    <div class="outerHeader">
+    </div>
+</div>
+<div class="container" style="width: 90%">
+    <form action="#!/locandinaEvento" method="post" class="form-horizontal" ng-submit="addListaNeeds()">
+        <div class="row" style="margin-top: 170px">
+            <div class="contenitore viola">
+                <div class="row">
+                    <div class="col-xs-3" style="margin-bottom: 10px; text-align: center; word-break: break-all">
+                        <span class="fa fa-user-plus" style="font-size: 1.5em" ng-model="dati.needs"><br />Barman</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 50px">
+            <div class="col-xs-3 col-xs-offset-2">
+                <div class="form-group">
+                    <select class="form-control" id="aggiungi">
+                        <option>AGGIUNGI</option>
+                        <option>Cameriere</option>
+                        <option>DJ</option>
+                        <option>Musicista</option>
+                        <option>Pulizie</option>
+                        <option>Sicurezza</option>
+                        <option>Socio</option>
+                        <option>Cassiere</option>
+                        <option>Altro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <select class="form-control" id="rimuovi">
+                        <option>RIMUOVI</option>
+                        <option>Cameriere</option>
+                        <option>DJ</option>
+                        <option>Musicista</option>
+                        <option>Pulizie</option>
+                        <option>Sicurezza</option>
+                        <option>Socio</option>
+                        <option>Cassiere</option>
+                        <option>Altro</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 50px">
+            <input type="submit" class="btn btn-default" name="submit" value="CONTINUA" />
+        </div>
+    </form>
+</div>
