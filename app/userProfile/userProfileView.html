@@ -1,16 +1,115 @@
-<h1>User profile</h1>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="page-header">
-            <h1>{{dati.user.name}} {{dati.user.surname}}</h1>
+<div >
+    <div class="header">
+        <div class="outerHeader">
+            <div class="MenuHeader">
+                <a href="#!/eventoView"><span class="fa fa-chevron-left"></span></a>
+            </div>
         </div>
-        <p>
-            <span class="glyphicon glyphicon-envelope"></span> {{dati.user.email}}
-        </p>
-
-        <p>
-            <button class="center-block btn btn-danger" ng-click="logout();">Logout</button>
-        </p>
+        <div class="centerHeader">
+            <span class="title">{{dati.user.name}} {{dati.user.surname}}</span>
+        </div>
+        <div class="outerHeader">
+        </div>
     </div>
+    <div class="container" style="width: 90%">
+        <div class="row" style="margin-top: 100px;">
+            <center>
+                <div class="round-profilo">
+                    <span class="fa fa-user"></span>
+                </div>
+            </center>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-xs-10 col-xs-offset-1">
+                <div ng-class="{'scheda active' : global.dati.currentView == 'CLIENTE', 'scheda' : global.dati.currentView != 'CLIENTE'}" id="sx">
+                    <a href="#!/userProfileView" ng-click="changeView('CLIENTE')">CLIENTE</a>
+                </div>
+                <div ng-class="{'scheda active' : global.dati.currentView == 'MANAGER', 'scheda' : global.dati.currentView != 'MANAGER'}" id="cc">
+                    <a href="#!/userProfileView" ng-click="changeView('MANAGER')">MANAGER</a>
+                </div>
+                <div ng-class="{'scheda active' : global.dati.currentView == 'WORKER', 'scheda' : global.dati.currentView != 'WORKER'}" id="dx">
+                    <a href="#!/userProfileView" ng-click="changeView('WORKER')">WORKER</a>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 120px" ng-if="global.dati.currentView === 'CLIENTE'">
+            <div class="rating">
+                <table align="center" width="84%">
+                    <tr>
+                        <td width="14%"><img src="../img/rating/1.png" style="max-height: 90px" class="img-responsive center-block"/></td>
+                        <td width="14%"><img src="../img/rating/1.png" style="max-height: 90px" class="img-responsive center-block"/></td>
+                        <td width="14%"><img src="../img/rating/1.png" style="max-height: 90px" class="img-responsive center-block"/></td>
+                        <td width="14%"><img src="../img/rating/1.png" style="max-height: 90px" class="img-responsive center-block"/></td>
+                        <td width="14%"><img src="../img/rating/1.png" style="max-height: 90px" class="img-responsive center-block"/></td>
+                        <td width="14%" style="padding-left: 10px; font-family: 'Nintendo'">4.8</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="height: 120px" ng-if="global.dati.currentView === 'MANAGER'">
+            <div class="rating">
+                <table align="center" width="84%">
+                    <tr>
+                        <td width="14%"><img src="../img/rating/star.png" style="max-height: 80px" class="img-responsive center-block"/></td>
+                        <td width="14%"><img src="../img/rating/star.png" style="max-height: 80px" class="img-responsive center-block"/></td>
+                        <td width="14%"><img src="../img/rating/star.png" style="max-height: 80px" class="img-responsive center-block"/></td>
+                        <td width="14%"><img src="../img/rating/star.png" style="max-height: 80px" class="img-responsive center-block"/></td>
+                        <td width="14%"><img src="../img/rating/star.png" style="max-height: 80px" class="img-responsive center-block"/></td>
+                        <td width="14%" style="padding-left: 10px; font-family: 'Nintendo'">4.8</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="height: 120px" ng-if="global.dati.currentView === 'WORKER'">
+            <div class="rating">
+                <table align="center" width="84%">
+                    <tr>
+                        <td width="80%" style="padding-right: 15%">
+                            <select name="tipo" class="form-control">
+                                <option>SELEZIONA</option>
+                                <option>CAMERIERE</option>
+                                <option>DJ</option>
+                                <option>PULIZIE</option>
+                            </select>
+                        </td>
 
+                        <td width="14%" style="font-family: 'Nintendo'">4.8</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4" ng-repeat="evento in dati.eventi"
+                 ng-if="(global.dati.currentView=='CLIENTE' && evento.clienti.includes(dati.user.$id)) || (global.dati.currentView=='WORKER' && evento.workers.includes(dati.user.$id))
+|| (global.dati.currentView=='MANAGER' && evento.manager == dati.user.$id)">
+                <div class="contenitore viola"
+                     ng-if="$index % 2 == 0"> <!-- Controllo sulle date e sulla currentView da aggiungere in ng-if-->
+                    <a href="#!/detailsEvento/{{evento.id}}">
+                        <div class="media-body">
+                            <h4 class="media-heading"><strong>{{evento.nome_evento}}</strong></h4>
+                            Location: {{evento.location_evento}}<br/>
+                            Date: {{evento.data_evento}}<br/>
+                            Min invitati: {{evento.min_invitati}}<br/>
+                            Max invitati: {{evento.max_invitati}}<br/>
+                            Prezzo: {{evento.prezzo}} €<br/>
+                        </div>
+                        <hr/>
+                    </a>
+                </div>
+                <div class="contenitore fucsia" ng-if="$index % 2 == 1"> <!-- Controllo sulle date e sulla currentView da aggiungere in ng-if-->
+                    <a href="#!/detailsEvento/{{evento.id}}">
+                        <div class="media-body">
+                            <h4 class="media-heading"><strong>{{evento.nome_evento}}</strong></h4>
+                            Location: {{evento.location_evento}}<br/>
+                            Date: {{evento.data_evento}}<br/>
+                            Min invitati: {{evento.min_invitati}}<br/>
+                            Max invitati: {{evento.max_invitati}}<br/>
+                            Prezzo: {{evento.prezzo}} €<br/>
+                        </div>
+                        <hr/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

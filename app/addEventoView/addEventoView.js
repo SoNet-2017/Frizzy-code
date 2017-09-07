@@ -19,21 +19,57 @@ angular.module('myApp.addEventoView',['ngRoute'])
     }]).service('myService', ['InsertEventoService', function (InsertEventoService) {
             this.inserNewEvento= function(dati){
                 dati.feedback = "";
-                    InsertEventoService.insertNewEvento(dati.nome_evento, //$scope.dati.nome_organizzatore,
-                        dati.data_evento, dati.location_evento, dati.min_invitati, dati.max_invitati, dati.prezzo).then(function(ref) {
-                        var eventoId = ref.key;
-                        InsertEventoService.updateEvento(eventoId);
-                        dati = {};
-                        dati.feedback = "The event was successfully added";
-                    })
+                    InsertEventoService.insertNewEvento(dati.manager, dati.nome_evento, //$scope.dati.nome_organizzatore,
+                        dati.data_evento, dati.location_evento, dati.min_invitati, dati.max_invitati, dati.prezzo, dati.imgPath, dati.lista_necessita)
                 };
         }])
-    .controller('addEventoViewCtrl', ['$scope', '$rootScope', '$firebaseStorage','myService',
-        function($scope, $rootScope, $firebaseStorage, myService) {
-            $rootScope.dati.currentView = 'addEvento';
-            console.log( $rootScope.dati.currentView);
+    .controller('addEventoViewCtrl', ['$scope', '$rootScope', '$firebaseStorage','myService','Auth','$location',
+        function($scope, $rootScope, $firebaseStorage, myService, Auth, $location) {
             $scope.dati = {};
+            var ctrl = this;
+            $rootScope.dati.currentView = 'addEvento';
+            $scope.dati.manager = Auth.$getAuth().uid;
+            $scope.dati.lista_necessita = [];
+            $scope.dati.fileToUpload = null;
+            $scope.dati.imgPath= "";
+
+            //initialize the function that will be called when a new file will be specified by the user
+            ctrl.onChange = function onChange(fileList) {
+                $scope.dati.fileToUpload = fileList[0];
+                console.log('Read file: '+$scope.dati.fileToUpload.name);
+            };
+
             $scope.addEvento = function() {
-                myService.inserNewEvento($scope.dati)
-            }
+                console.log('In addEvento');
+                if ($scope.dati.fileToUpload !== null) {
+                    var fileName = $scope.dati.fileToUpload.name;
+                    //specify the path in which the file should be saved on firebase
+                    var storageRef = firebase.storage().ref("eventiImg/" + fileName);
+                    $scope.storage = $firebaseStorage(storageRef);
+                    var uploadTask = $scope.storage.$put($scope.dati.fileToUpload);
+                    console.log('Put ok');
+                    uploadTask.$complete(function (snapshot) {
+                        $scope.dati.imgPath = snapshot.downloadURL;
+                        console.log('Load ok');
+                        myService.inserNewEvento($scope.dati);
+                        console.log('Upload complete imgPath: ' + $scope.dati.imgPath);
+                        $location.path("#!/eventoView");
+                    });
+                    uploadTask.$error(function (error) {
+                        console.log('Load not ok: '+error);
+                        myService.inserNewEvento($scope.dati);
+                        $location.path("#!/eventoView");
+                    });
+                }else{
+                    myService.inserNewEvento($scope.dati);
+                    $location.path("#!/eventoView");
+                }
+            };
+
+            $scope.addWorker = function(){
+                $scope.dati.lista_necessita.push($scope.itemAdd);
+            };
+            $scope.removeWorker = function(){
+                $scope.dati.lista_necessita.splice( $scope.dati.lista_necessita.indexOf($scope.itemRemove), 1 );
+            };
         }]);

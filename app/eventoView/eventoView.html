@@ -35,9 +35,11 @@
 </div> -->
 
 <div class="row">
-    <div class="col-xs-12 col-md-4" ng-repeat="evento in dati.eventi">
+    <div class="col-xs-12 col-md-4" ng-repeat="evento in dati.eventi"
+	ng-if="(global.dati.currentView=='NOW' && dateTimeToDate(evento.data_evento) >= now && dateTimeToDate(evento.data_evento) <= now + 604800000) || (global.dati.currentView=='PAST' && dateTimeToDate(evento.data_evento) < now )
+|| (global.dati.currentView=='FUTURE' && dateTimeToDate(evento.data_evento) > now + 604800000)">
 		<div class="contenitore viola"
-			 ng-if="$index % 2 == 0 "> <!-- Controllo sulle date e sulla currentView da aggiungere in ng-if-->
+			 ng-if="$index % 2 == 0"> <!-- Controllo sulle date e sulla currentView da aggiungere in ng-if-->
 			<a href="#!/detailsEvento/{{evento.id}}">
 				<div class="media-body">
 					<h4 class="media-heading"><strong>{{evento.nome_evento}}</strong></h4>

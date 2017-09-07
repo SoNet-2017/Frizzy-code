@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <title>FRIZZY!</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="description" content=""/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
 
   <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css"/>
   <link rel="stylesheet" href="app.css"/>
@@ -22,7 +22,7 @@
    <script type="text/javascript" src="../js/codice.js"></script>
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
+  <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js'></script>
  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
 
@@ -53,7 +53,7 @@
 </head>
 
 <body ng-app="myApp" ng-controller="MainCtrl">
-<div class="header"  ng-if="dati.currentView !== 'addEvento'">
+<div class="header">
   <div class="outerHeader">
     <div class="MenuHeader">
       <span class="fa fa-bars"></span>
@@ -61,7 +61,7 @@
 		  <div id="menuTopBar">
 			<a href="#!/eventoView">HOME</a><br/>
 			<a href="#!/userProfileView" ng-if="isLogged()">PROFILO</a><br/>
-			<a href="#!/addEventoView" ng-if="isLogged()">CREA EVENTO</a><br/>
+			<a href="#!/addEvento" ng-if="isLogged()">CREA EVENTO</a><br/>
 			<a href="#!/loginView" ng-if="isLogged()" ng-click="logout();">LOGOUT</a><br/>
 			<a href="#!/userRegistrationView" ng-if="!isLogged()">REGISTRATI</a><br/>
 		  </div>
@@ -77,16 +77,16 @@
         </div>
       </div>
 </div>
-<div class="container" style="width: 90%" ng-if="dati.currentView !== 'addEvento'">
+<div class="container" style="width: 90%" ng-if="dati.currentView !== 'addEvento' && !['CLIENTE','MANAGER','WORKER'].includes(dati.currentView)">
   <div class="row" style="margin-top: 170px;">
     <div class="col-xs-10 col-xs-offset-1">
-      <div ng-class="{'scheda active' : dati.currentView === 'PAST', 'scheda' : dati.currentView !== 'PAST'}" id="sx">
+      <div ng-class="{'scheda active' : dati.currentView === 'PAST', 'scheda' : dati.currentView !== 'PAST'}" ng-if="['NOW','PAST','FUTURE'].includes(dati.currentView)" id="sx">
         <a href="#!/eventoView" ng-click="changeView('PAST')">PAST</a>
       </div>
-      <div ng-class="{'scheda active' : dati.currentView === 'NOW', 'scheda' : dati.currentView !== 'NOW'}" id="cc">
+      <div ng-class="{'scheda active' : dati.currentView === 'NOW', 'scheda' : dati.currentView !== 'NOW'}" ng-if="['NOW','PAST','FUTURE'].includes(dati.currentView)" id="cc">
         <a href="#!/eventoView"  ng-click="changeView('NOW')">NOW</a>
       </div>
-      <div ng-class="{'scheda active' : dati.currentView === 'FUTURE', 'scheda' : dati.currentView !== 'FUTURE'}" id="dx">
+      <div ng-class="{'scheda active' : dati.currentView === 'FUTURE', 'scheda' : dati.currentView !== 'FUTURE'}" ng-if="['NOW','PAST','FUTURE'].includes(dati.currentView)" id="dx">
         <a href="#!/eventoView" ng-click="changeView('FUTURE')">FUTURE</a>
       </div>
     </div>

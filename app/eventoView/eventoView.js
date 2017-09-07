@@ -22,14 +22,25 @@ angular.module('myApp.eventoView', ['ngRoute','myApp.evento'])
 .controller('View1Ctrl', ['$scope','$rootScope', 'Evento', function($scope,$rootScope, Evento) {
     //initialize variables
     $scope.dati={};
+    if (!['NOW','PAST','FUTURE'].includes($rootScope.dati.currentView)){
+        $rootScope.dati.currentView = "NOW";}
     $scope.dati.vm = this;
     $scope.dati.vm.positions = [];
-    //set the variable that is used in the main template to show the active button
-    $scope.now=new Date();
+
+    var dateNow = new Date();
+    $scope.now=dateNow.getTime();
+    $scope.global = $rootScope;
+    console.log('now: '+$rootScope.dati.currentView);
+    //$scope.currentView = $rootScope.dati.currentView;
     //get the list of available pizzas
     $scope.dati.eventi = Evento.getData();
     //$scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6qAQOEvZs2XlUUu3ziu-nrDX-WWZXap4";
     //only when all data will be loaded, the map will be created
+    $scope.dateTimeToDate = function(str) {
+        if(str!==undefined) {
+            return Date.parse(str);
+        }
+    };
  /*   $scope.dati.eventi.$loaded().then(function () {
         for (var i = 0; i < $scope.dati.eventi.length; i++) {
             var lat = 45.071087 + (Math.random() / 100);

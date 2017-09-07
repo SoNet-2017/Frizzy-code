@@ -3,7 +3,7 @@
 angular.module('myApp.userProfileView', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/userProfile', {
+  $routeProvider.when('/userProfileView', {
     templateUrl: 'userProfile/userProfileView.html',
     controller: 'userProfileCtrl',
       resolve: {
@@ -19,13 +19,15 @@ angular.module('myApp.userProfileView', ['ngRoute'])
   })
 }])
 
-.controller('userProfileCtrl', ['$scope', '$rootScope', 'UsersChatService', 'Users', 'currentAuth', '$firebaseAuth', '$location', function($scope, $rootScope, UsersChatService, Users, currentAuth, $firebaseAuth, $location) {
+.controller('userProfileCtrl', ['$scope', '$rootScope', 'UsersChatService', 'Users', 'currentAuth', '$firebaseAuth', '$location', 'Evento', '$route',
+function($scope, $rootScope, UsersChatService, Users, currentAuth, $firebaseAuth, $location, Evento, $route) {
     $scope.dati={};
-    //set the variable that is used in the main template to show the active button
-    $rootScope.dati.currentView = "userProfile";
+    if (!['CLIENTE','MANAGER','WORKER'].includes($rootScope.dati.currentView)){
+        $rootScope.dati.currentView = "CLIENTE";}
+    console.log( $rootScope.dati.currentView);
     $scope.dati.user = UsersChatService.getUserInfo(currentAuth.uid);
-
-
+    $scope.dati.eventi = Evento.getData();
+    $scope.global = $rootScope;
     // function called when the "logout" button will be pressed
     $scope.logout = function () {
 
@@ -42,5 +44,11 @@ angular.module('myApp.userProfileView', ['ngRoute'])
         });
 
 
+    };
+
+    $scope.changeView = function(view){
+        $rootScope.dati.currentView = view;
+        console.log($scope.global.dati.currentView);
+        $route.reload();
     };
 }]);
